@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 @Service
@@ -22,12 +23,26 @@ public class TaskService {
         return repo.save(task);
     }
 
-    public List<TaskDTO> getTask(String text)
+    public void deleteTask(int id)
+    {
+        repo.deleteById(id);
+    }
+
+    public void updateTaskChecked(int id)
+    {
+        Task task = repo.findById(id).get();
+
+        task.setCompleted(!task.isCompleted());
+
+        repo.save(task);
+    }
+
+    public List<TaskDTO> getTasks()
     {
         List<TaskDTO> tasks = new ArrayList<>();
 
         repo.findAll().forEach(task -> {
-            TaskDTO taskDTO = new TaskDTO(task.getId(), task.getText());
+            TaskDTO taskDTO = new TaskDTO(task.getId(), task.getText(), task.isCompleted());
 
             tasks.add(taskDTO);
         });

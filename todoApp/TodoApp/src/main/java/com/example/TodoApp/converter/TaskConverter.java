@@ -7,6 +7,6 @@ import org.springframework.stereotype.Component;
 @Component
 public class TaskConverter {
     public TaskDTO toDTO(Task task) {
-        return new TaskDTO(task.getId(), task.getText());
+        return new TaskDTO(task.getId(), task.getText(), task.isCompleted());
     }
 }

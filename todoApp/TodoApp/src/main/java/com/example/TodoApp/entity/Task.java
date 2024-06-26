@@ -19,7 +19,8 @@ public class Task {
     private String text;
     private boolean completed;
 
-    public Task(String text) {
+    public Task(String text, boolean completed) {
         this.text = text;
+        this.completed = completed;
     }
 }
